@@ -1,0 +1,17 @@
+<div class="content">
+	<div class="contentHeader">
+		Orders
+	</div>
+	<div class="contentWrapper">	
+
+		<div ng-controller="OrderListCtrl">
+			<column-headers dataset="header"></column-headers>
+			<div ng-repeat="order in orders">
+				
+				<order-line-items dataset="order"></order-line-items>
+				
+			</div>
+		</div>
+	
+	</div>
+</div>

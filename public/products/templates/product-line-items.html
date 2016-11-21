@@ -1,0 +1,7 @@
+<div class='tableLine row' ng-repeat="item in dataset">
+	<div class='col-xs-4'>
+		<img class='iconWrap' ng-src='{{ item.img }}'>
+	</div>
+	<p class='col-xs-4'>{{ item.name }}</p>
+	<p class=' col-xs-4'>{{ item.price | currency }}</p>
+</div>

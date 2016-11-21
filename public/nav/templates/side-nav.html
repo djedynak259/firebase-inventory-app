@@ -1,0 +1,29 @@
+	<div class="nav-side-menu" ng-controller="NavCtrl">
+	    <div class="brand">{{nav.appName}}</div>
+	    <i class="fa fa-bars fa-2x toggle-btn" data-toggle="collapse" data-target="#menu-content" ></i>
+	  
+    	
+        <ul class=" menu-content" id="accordion">
+
+            <li class="panel active" data-toggle="collapse" data-parent="#accordion" data-target="#firstLink" ui-sref="products"> {{nav.categories.catOne}}
+                <ul id="firstLink" class="sub-menu collapse">
+                    <li data-toggle="modal" data-target="#productModal">{{nav.subCat.subOne}}</li>
+<!--                     <li data-toggle="modal" 
+                    data-target="#mergeModal">Merge Products</li> -->
+                </ul>
+            </li>
+
+            <li class="panel active" data-toggle="collapse" data-parent="#accordion" data-target="#secondLink" ui-sref="orders"> {{nav.categories.catTwo}}
+                <ul id="secondLink" class="sub-menu collapse">
+                    <li>{{nav.subCat.subTwo}}</li>
+                </ul>
+            </li>
+
+            <li class="panel active" data-toggle="collapse" data-parent="#accordion" data-target="#thirdLink" ui-sref="contacts"> {{nav.categories.catThree}}
+                <ul id="thirdLink" class="sub-menu collapse">
+                    <li data-toggle="modal" data-target="#contactModal">{{nav.subCat.subThree}}</li>
+                </ul>
+            </li>
+
+        </ul>
+	</div>

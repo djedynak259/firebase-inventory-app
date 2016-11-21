@@ -3,7 +3,7 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">    
-    <title>Welcome to Firebase Hosting</title>
+    <title>Squish Flabs</title>
 
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
   <link rel="stylesheet" type="text/css" href="css/main.css">
@@ -12,11 +12,20 @@
 
 <body ng-app="InventoryApp">
 
-  <div id="message" ng-controller="MyCtrl">
+  <div class="wrapAll">
 
-{{object.name | json}}
+    <side-nav></side-nav>
+
+    <ui-view></ui-view>
+
+        <div id="message" ng-controller="MyCtrl">
+
+      {{object.name | json}}
+
+        </div>
 
   </div>
+
 
 <!-- SCRIPT -->
 
@@ -33,6 +42,17 @@
   <!-- AngularFire -->
   <script src="https://cdn.firebase.com/libs/angularfire/2.1.0/angularfire.min.js"></script>
 
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/angular-ui-router/0.3.1/angular-ui-router.js"></script>
+
   <script type="text/javascript" src="js/main.js"></script> 
+  <script type="text/javascript" src="orders/controllers/orders_controller.js"></script> 
+  <script type="text/javascript" src="orders/directives/orders_directive.js"></script>  
+  <script type="text/javascript" src="products/controllers/products_controller.js"></script> 
+  <script type="text/javascript" src="products/directives/products_directive.js"></script>
+  <script type="text/javascript" src="contacts/controllers/contacts_controller.js"></script> 
+  <script type="text/javascript" src="contacts/directives/contacts_directive.js"></script>    
+  <script type="text/javascript" src="nav/controllers/nav_controller.js"></script> 
+  <script type="text/javascript" src="nav/directives/nav_directive.js"></script>
+
 </body>
 </html>
