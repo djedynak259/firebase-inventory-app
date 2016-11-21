@@ -1,7 +1,7 @@
-<div class='tableLine row' ng-repeat="item in dataset">
+<div class='tableLine row' ng-repeat="product in dataset">
 	<div class='col-xs-4'>
-		<img class='iconWrap' ng-src='{{ item.img }}'>
+		<img class='iconWrap' ng-src='{{ product.img }}'>
 	</div>
-	<p class='col-xs-4'>{{ item.name }}</p>
-	<p class=' col-xs-4'>{{ item.price | currency }}</p>
+	<p class='col-xs-4'>{{ product.name }}</p>
+	<p class=' col-xs-4'>{{ product.price | currency }}</p>
 </div>

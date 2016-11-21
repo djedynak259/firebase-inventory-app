@@ -1,3 +1,3 @@
-angular.module('OrderController', ['firebase', 'ui.router'])
+angular.module('ProductsDirective', ['firebase', 'ui.router'])
 
 ;

@@ -10,7 +10,6 @@
 
 firebase.initializeApp(config);
 
-
 angular.module('InventoryApp', [
 	'firebase', 
 	'ui.router', 
@@ -24,18 +23,21 @@ angular.module('InventoryApp', [
   .state({
     name: 'products',
     url: '/products',
-    templateUrl: 'products/templates/products.html'
+    templateUrl: 'products/templates/products.html',
+    redirectTo: '/'
   })
   .state({
     name: 'orders',
     url: '/orders',
-    templateUrl: 'orders/templates/orders.html'
+    templateUrl: 'orders/templates/orders.html',
+    redirectTo: '/'
   })
   .state({
     name: 'contacts',
-    url: '/contact?id&something&new',
-    templateUrl: 'contacts/templates/contacts.html'
-  })
+    url: '/contacts?id&something&new',
+    templateUrl: 'contacts/templates/contacts.html',
+    redirectTo: '/'
+  });
 })
 
 .config(function($firebaseRefProvider) {
@@ -85,7 +87,7 @@ angular.module('InventoryApp', [
     scope: { 
       dataset: '=' 
     }, 
-    templateUrl: "templates/column-headers.html"
+    templateUrl: "products/templates/column-headers.html"
 	}; 
 })
 
@@ -95,7 +97,7 @@ angular.module('InventoryApp', [
     scope: { 
       dataset: '=' 
     }, 
-    templateUrl: 'templates/product-line-items.html'
+    templateUrl: 'products/templates/product-line-items.html'
 	}; 
 })
 
@@ -114,7 +116,7 @@ angular.module('InventoryApp', [
       view: '&' 
     }, 
     controller: controller,
-    templateUrl: 'templates/order-line-items.html'
+    templateUrl: 'orders/templates/order-line-items.html'
 	}; 
 })
 
@@ -125,7 +127,7 @@ angular.module('InventoryApp', [
     scope: { 
       dataset: '=' 
     }, 
-    templateUrl: 'templates/contact-line-items.html'
+    templateUrl: 'contacts/templates/contact-line-items.html'
 	}; 
 })
 
@@ -143,12 +145,12 @@ angular.module('InventoryApp', [
 		},
 		{
 			name: "box2",
-			price: 10,
+			price: 12,
 			img: "img/box.png"
 		},
 		{
 			name: "box3",
-			price: 10,
+			price: 13,
 			img: "img/box.png"
 		}
 	];
