@@ -16,6 +16,12 @@ angular.module('InventoryApp', [
 	'NavController',  
 	'NavDirective',
 	'OrdersController',
+	'OrdersDirective',
+	'ProductsController',
+	'ProductsDirective',
+	'ContactsController',
+	'ContactsDirective',
+	'ColumnHeaderDirective'
 	])
 
 .config(function($stateProvider) {
@@ -47,94 +53,6 @@ angular.module('InventoryApp', [
 		nav: `${config.databaseURL}/angular/nav`,
 	});
 })
-
-.factory('ObjectFactory', function($firebaseObject, $firebaseRef) {
-	return $firebaseObject($firebaseRef.object);
-})
-
-.controller('MyCtrl', function($scope, ObjectFactory){
-	$scope.object = ObjectFactory;
-})
-
-// OLD CODE
-	
-.controller('ProductListCtrl', function($scope, ProductList, Headers){
-	$scope.products = ProductList;
-	$scope.header = Headers.productHeaders;
-
-})
-
-.controller('OrderListCtrl', function($scope, OrderList, Headers){
-	$scope.orders = OrderList;
-	$scope.header = Headers.orderHeaders;
-	// $scope.view = function(item) {
-	// 	console.log(item);
-	// }
-})
-
-.controller('ContactListCtrl', function($scope, ContactList, Headers){
-	$scope.contacts = ContactList;
-	$scope.header = Headers.contactHeaders;
-
-})
-
-
-// DIRECTIVES
-
-.directive('columnHeaders', function() { 
-  return { 
-    restrict: 'E', 
-    scope: { 
-      dataset: '=' 
-    }, 
-    templateUrl: "products/templates/column-headers.html"
-	}; 
-})
-
-.directive('productLineItems', function() { 
-  return { 
-    restrict: 'E', 
-    scope: { 
-      dataset: '=' 
-    }, 
-    templateUrl: 'products/templates/product-line-items.html'
-	}; 
-})
-
-.directive('orderLineItems', function() { 
-
-	function controller($scope ) {
-			$scope.view = function(item) {
-			console.log(item);
-		};
-	}
-
-  return { 
-    restrict: 'E', 
-    scope: { 
-      dataset: '=',
-      view: '&' 
-    }, 
-    controller: controller,
-    templateUrl: 'orders/templates/order-line-items.html'
-	}; 
-})
-
-
-.directive('contactLineItems', function() { 
-  return { 
-    restrict: 'E', 
-    scope: { 
-      dataset: '=' 
-    }, 
-    templateUrl: 'contacts/templates/contact-line-items.html'
-	}; 
-})
-
-
-
-// FACTORIES
-
 
 .factory('ProductList', function(){
 	return [
