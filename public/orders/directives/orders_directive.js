@@ -2,21 +2,28 @@ angular.module('OrdersDirective', ['firebase', 'ui.router'])
 
 .directive('orderLineItems', function() { 
 
-	function controller($scope ) {
-			$scope.view = function(item) {
-			console.log(item);
-		};
+	function controller($scope, ModalService){
+
+		$scope.showOrderModal = function(order) {
+			console.log(order.price);
+	        ModalService.showModal({
+	            templateUrl: 'orders/templates/order-open-modal.html',
+	            controller: "OrderOpenModalController"
+	        }).then(function(modal) {
+	            modal.element.modal();
+	        });
+	    }; 
+
 	}
 
-  return { 
-    restrict: 'E', 
-    scope: { 
-      dataset: '=',
-      view: '&' 
-    }, 
-    controller: controller,
-    templateUrl: 'orders/templates/order-line-items.html'
-	}; 
+	return { 
+		restrict: 'E', 
+		scope: { 
+		  dataset: '=' 
+		}, 
+		controller: controller,
+		templateUrl: 'orders/templates/order-line-items.html'
+		}; 
 })
 
 ;

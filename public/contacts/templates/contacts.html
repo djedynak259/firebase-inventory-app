@@ -1,16 +1,14 @@
-	<div class="content">
-		<div class="contentHeader">
-			Contacts
-		</div>
-		<div class="contentWrapper">
-		
-			<div ng-controller="ContactListCtrl">
-				<column-headers dataset="header"></column-headers>
-				<div ng-repeat="contact in contacts">
-					
-					<contact-line-items dataset="contact"></contact-line-items>
-					
-				</div>
-			</div>
-		</div>
+<div class="content">
+	<div class="contentHeader">
+		Contacts
 	</div>
+	<div class="contentWrapper">
+	
+		<div ng-controller="ContactListCtrl">
+			<column-headers dataset="header"></column-headers>
+			<contact-line-items dataset="contacts"></contact-line-items>
+			<contact-line-items dataset="fbContacts"></contact-line-items>			
+		</div>
+		
+	</div>
+</div>

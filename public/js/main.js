@@ -12,7 +12,8 @@ firebase.initializeApp(config);
 
 angular.module('InventoryApp', [
 	'firebase', 
-	'ui.router', 
+	'ui.router',
+	'angularModalService', 
 	'NavController',  
 	'NavDirective',
 	'OrdersController',
@@ -26,6 +27,11 @@ angular.module('InventoryApp', [
 
 .config(function($stateProvider) {
   $stateProvider
+  .state({
+  	name:'home',
+  	url: '/',
+  	templateUrl:'test'
+  })
   .state({
     name: 'products',
     url: '/products',
@@ -51,7 +57,16 @@ angular.module('InventoryApp', [
 		default:config.databaseURL,
 		object: `${config.databaseURL}/angular/object`,
 		nav: `${config.databaseURL}/angular/nav`,
+		contacts: `${config.databaseURL}/angular/contacts`
 	});
+})
+
+.factory('NavFirebase', function($firebaseObject, $firebaseRef) {
+	return $firebaseObject($firebaseRef.nav);
+})
+
+.factory('ContactFirebase', function($firebaseObject, $firebaseRef) {
+	return $firebaseObject($firebaseRef.contacts);
 })
 
 .factory('ProductList', function(){
