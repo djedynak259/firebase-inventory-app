@@ -1,7 +1,5 @@
-<div class='tableLine row' ng-repeat="order in dataset" ng-click="showOrderModal(order)">
-
-		<p class='col-xs-4'>{{ order.number }}</p>
-		<p class='col-xs-4'>{{ order.contact }}</p>
-		<p class=' col-xs-4'>{{ order.price | currency }}</p>
-
+<div class='tableLine' ng-repeat="order in dataset" ng-click="showOrderModal(order)">
+	<p class='col-xs-4'>{{ order.number }}</p>
+	<p class='col-xs-4'>{{ order.contact }}</p>
+	<p class='col-xs-4'>{{ order.price | currency }}</p>
 </div>	

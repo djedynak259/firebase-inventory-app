@@ -2,7 +2,7 @@ angular.module('ColumnHeaderDirective', ['firebase', 'ui.router'])
 
 .directive('columnHeaders', function() { 
   return { 
-    restrict: 'E', 
+    restrict: 'EA', 
     scope: { 
       dataset: '=' 
     }, 
