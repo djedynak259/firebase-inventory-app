@@ -6,7 +6,7 @@ angular.module('ColumnHeaderDirective', ['firebase', 'ui.router'])
     scope: { 
       dataset: '=' 
     }, 
-    templateUrl: "products/templates/column-headers.html"
+    templateUrl: "column-headers/column-headers.html"
 	}; 
 })
 
