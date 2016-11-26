@@ -30,7 +30,7 @@ angular.module('InventoryApp', [
   .state({
   	name:'home',
   	url: '/',
-  	templateUrl:'test'
+  	templateUrl:'nav/templates/main-page.html'
   })
   .state({
     name: 'products',

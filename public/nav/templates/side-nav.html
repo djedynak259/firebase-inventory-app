@@ -1,31 +1,25 @@
-	<div class="nav-side-menu" ng-controller="NavCtrl">
-	    <div class="brand" ui-sref="home">{{nav.appName}}</div> 
-    	
-        <ul class=" menu-content" id="accordion">
+<div class="nav-side-menu" ng-controller="NavCtrl">
+	<div class="brand" ui-sref="home">{{nav.appName}}</div>
+    <ul class=" menu-content" id="accordion">
 
-            <li class="panel active" data-toggle="collapse" data-parent="#accordion" data-target="#firstLink" ui-sref="products"> {{nav.categories.catOne}}
-                <ul id="firstLink" class="sub-menu collapse">
-                    <li ng-click="showProductAdd()">{{nav.subCat.subOne}}</li>
+        <li class="panel" data-toggle="collapse" data-parent="#accordion" data-target="#firstLink" ui-sref="products"> {{nav.categories.catOne}}
+            <ul id="firstLink" class="sub-menu collapse">
+                <li ng-click="showProductAdd()">{{nav.subCat.subOne}}</li>
 <!--                     <li data-toggle="modal" 
-                    data-target="#mergeModal">Merge Products</li> -->
-                </ul>
-            </li>
+                data-target="#mergeModal">Merge Products</li> -->
+            </ul>
+        </li>
 
-            <li class="panel active" data-toggle="collapse" data-parent="#accordion" data-target="#secondLink" ui-sref="orders"> {{nav.categories.catTwo}}
-                <ul id="secondLink" class="sub-menu collapse">
-                    <li>{{nav.subCat.subTwo}}</li>
-                </ul>
-            </li>
+        <li class="panel" data-toggle="collapse" data-parent="#accordion" data-target="#secondLink" ui-sref="orders"> {{nav.categories.catTwo}}
+            <ul id="secondLink" class="sub-menu collapse">
+                <li>{{nav.subCat.subTwo}}</li>
+            </ul>
+        </li>
 
-            <li class="panel active" data-toggle="collapse" data-parent="#accordion" data-target="#thirdLink" ui-sref="contacts"> {{nav.categories.catThree}}
-                <ul id="thirdLink" class="sub-menu collapse">
-                    <li ng-click="showContactAdd()">{{nav.subCat.subThree}}</li>
-                </ul>
-            </li>
-
-        </ul>
-    
+        <li class="panel" data-toggle="collapse" data-parent="#accordion" data-target="#thirdLink" ui-sref="contacts"> {{nav.categories.catThree}}
+            <ul id="thirdLink" class="sub-menu collapse">
+                <li ng-click="showContactAdd()">{{nav.subCat.subThree}}</li>
+            </ul>
+        </li>
+    </ul>
 </div>
-
-
-	</div>
