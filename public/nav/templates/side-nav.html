@@ -1,7 +1,6 @@
 <div class="nav" ng-controller="NavCtrl">
 	<div class="brand" ui-sref="home">{{nav.appName}}</div>
     <ul class="nav-menu-content" id="accordion">
-
         <li class="nav-menu-pages panel" data-toggle="collapse" data-parent="#accordion" data-target="#firstLink" ui-sref="products"> 
             <h4>{{nav.categories.catOne}}</h4>
             <ul id="firstLink" class="sub-menu collapse">
@@ -10,14 +9,12 @@
                 data-target="#mergeModal">Merge Products</li> -->
             </ul>
         </li>
-
         <li class="nav-menu-pages panel" data-toggle="collapse" data-parent="#accordion" data-target="#secondLink" ui-sref="orders"> 
             <h4>{{nav.categories.catTwo}}</h4>
             <ul id="secondLink" class="sub-menu collapse">
                 <li class="nav-menu-actions">{{nav.subCat.subTwo}}</li>
             </ul>
         </li>
-
         <li class="nav-menu-pages panel" data-toggle="collapse" data-parent="#accordion" data-target="#thirdLink" ui-sref="contacts">
             <h4>{{nav.categories.catThree}}</h4>
             <ul id="thirdLink" class="sub-menu collapse">
