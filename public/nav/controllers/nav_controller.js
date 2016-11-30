@@ -61,7 +61,20 @@ angular.module('NavController', ['firebase', 'ui.router','angularModalService'])
 		var count = 0;
 		function contactCount() {
 			var rawObject = $firebaseObject($firebaseRef.contacts);
-			console.log(rawObject);
+			rawObject.$loaded().then(function() {
+				for(var key in rawObject) {
+					console.log(key);
+				}
+			});
+
+			// console.log(rawObject);
+			// console.log(rawObject['e']);
+
+			// console.log(Object.keys(rawObject));
+
+			// for (var key in rawObject.e) {
+			// 	console.log(key);
+			// }
 
 			// MAYBE?	
 
@@ -73,13 +86,7 @@ angular.module('NavController', ['firebase', 'ui.router','angularModalService'])
 			// }, contacts);
 			// console.log(contacts);
 
-			for (var key in rawObject) {
-				console.log(key);
-			   if (key.hasOwnProperty('name')) {
-			      	count ++;
-			   }
-			}
-			console.log(count);
+			
 
 			// for (var key in contacts) {
 			//    if (contacts.hasOwnProperty(key)) {
@@ -92,13 +99,13 @@ angular.module('NavController', ['firebase', 'ui.router','angularModalService'])
 			//    }
 			// }
 
-
+			// Query for contact name before saving
 
 		}
 		contactCount();
 
-		firebase.database().ref('angular/contacts/contact' + $scope.newcontact.id)
-			.set($scope.newcontact);
+		// firebase.database().ref('angular/contacts/contact' + $scope.newcontact.id)
+		// 	.set($scope.newcontact);
 	}
 
 })

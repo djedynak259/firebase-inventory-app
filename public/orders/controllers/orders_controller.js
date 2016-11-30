@@ -19,9 +19,11 @@ angular.module('OrdersController', ['firebase', 'ui.router', 'angularModalServic
 
 })
 
-.controller('OrderOpenModalController', function($scope, close) {
+.controller('OrderOpenModalController', function($scope, close, dataset) {
 
 	$scope.test= 'modalest';
+
+	console.log('init', dataset);
 
 	$scope.close = function(result) {
 		close(result, 500); // close, but give 500ms for bootstrap to animate

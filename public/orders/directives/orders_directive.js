@@ -8,7 +8,10 @@ angular.module('OrdersDirective', ['firebase', 'ui.router'])
 			console.log(order.price);
 	        ModalService.showModal({
 	            templateUrl: 'orders/templates/order-open-modal.html',
-	            controller: "OrderOpenModalController"
+	            controller: "OrderOpenModalController",
+	            inputs: {
+	            	dataset: order
+	            }
 	        }).then(function(modal) {
 	            modal.element.modal();
 	        });
