@@ -18,7 +18,6 @@ angular.module('NavController', ['firebase', 'ui.router','angularModalService'])
     };
 
 	$scope.showContactAdd = function() {
-		console.log('test');
         ModalService.showModal({
             templateUrl: 'nav/templates/add-contact-modal.html',
             controller: "ContactAddModalController"
@@ -49,63 +48,33 @@ angular.module('NavController', ['firebase', 'ui.router','angularModalService'])
 		close(result, 500); // close, but give 500ms for bootstrap to animate
 	};
 
-	$scope.contactAdd = function(newcontact) {
-		console.log('test');
+	$scope.contactAdd = function() {
 		// ContactList.push($scope.newcontact);
-		writeContactData(newcontact);
+		writeContactData();
 		$scope.newcontact = {};
 	};
 
-	function writeContactData(newcontact) {
-		
-		var count = 0;
-		function contactCount() {
-			var rawObject = $firebaseObject($firebaseRef.contacts);
-			rawObject.$loaded().then(function() {
-				for(var key in rawObject) {
-					console.log(key);
+	function checkContacts() {
+		var newContact = $scope.newcontact;
+		console.log('name of new contact', newContact.name);		
+		var rawObject = $firebaseObject($firebaseRef.contacts);
+		rawObject.$loaded().then(function() {
+			for(var key in rawObject) {	
+				console.log(key);
+				if (newContact.name === key) {
+					console.log('this contact already exists');
+					return false;
 				}
-			});
+			}
+		});
+	}
 
-			// console.log(rawObject);
-			// console.log(rawObject['e']);
-
-			// console.log(Object.keys(rawObject));
-
-			// for (var key in rawObject.e) {
-			// 	console.log(key);
-			// }
-
-			// MAYBE?	
-
-			// var contacts = [];
-			// angular.forEach(rawObject, function(value, key) {
-			// 	if(key === ''){	
-			//   		this.push(key + ': ' + value);
-			// 	}
-			// }, contacts);
-			// console.log(contacts);
-
-			
-
-			// for (var key in contacts) {
-			//    if (contacts.hasOwnProperty(key)) {
-			//       var obj = contacts[key];
-			//       for (var prop in obj) {
-			//          if (obj.hasOwnProperty(prop)) {
-			//             alert(prop + " = " + obj[prop]);
-			//          }
-			//       }
-			//    }
-			// }
-
-			// Query for contact name before saving
-
-		}
-		contactCount();
-
-		// firebase.database().ref('angular/contacts/contact' + $scope.newcontact.id)
-		// 	.set($scope.newcontact);
+	function writeContactData() {
+		var contactCheck = checkContacts()
+		contactCheck.then(function() {
+			firebase.database().ref('angular/contacts/' + $scope.newcontact.name)
+			.set($scope.newcontact);
+		});
 	}
 
 })
