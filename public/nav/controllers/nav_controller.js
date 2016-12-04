@@ -44,37 +44,62 @@ angular.module('NavController', ['firebase', 'ui.router','angularModalService'])
 
 .controller('ContactAddModalController', function($scope, close, ContactList, $firebaseObject, $firebaseRef) {
   
+  	var ifExists = false;
+  	$scope.ifContact = function() {
+  		return ifExists;
+  	}
+
 	$scope.close = function(result) {
 		close(result, 500); // close, but give 500ms for bootstrap to animate
 	};
 
 	$scope.contactAdd = function() {
 		// ContactList.push($scope.newcontact);
+		ifExists = false;
 		writeContactData();
 		$scope.newcontact = {};
 	};
 
-	function checkContacts() {
+	function writeContactData() {
 		var newContact = $scope.newcontact;
-		console.log('name of new contact', newContact.name);		
-		var rawObject = $firebaseObject($firebaseRef.contacts);
-		rawObject.$loaded().then(function() {
-			for(var key in rawObject) {	
-				console.log(key);
-				if (newContact.name === key) {
-					console.log('this contact already exists');
-					return false;
-				}
+		var contactAvailable = checkContacts();
+		console.log('checkContact results -', contactAvailable);
+		return new Promise(function(resolve, reject) {
+			resolve(contactAvailable);
+		})
+		.then(function() {
+			if (contactAvailable === true) {
+				firebase.database().ref('angular/contacts/' + newContact.name)
+				.set(newContact);
+				console.log('Contact Added');
+			} else {
+				ifExists = true;
+				console.log('ifExists', ifExists);
+				$scope.ifContact();
+				console.log('Contact already exists');
 			}
 		});
 	}
 
-	function writeContactData() {
-		var contactCheck = checkContacts()
-		contactCheck.then(function() {
-			firebase.database().ref('angular/contacts/' + $scope.newcontact.name)
-			.set($scope.newcontact);
+	function checkContacts() {
+		var newContact = $scope.newcontact;
+		var available;
+		console.log('name of new contact', newContact.name);		
+		var rawObject = $firebaseObject($firebaseRef.contacts);
+		rawObject.$loaded()
+		.then(function() {
+			for(var key in rawObject) {	
+				console.log(key);
+				if (newContact.name === key) {
+					available = false;
+					return;
+				} else {
+					available = true;
+				}
+			}	
 		});
+		console.log('available', available);
+		return available;		
 	}
 
 })
