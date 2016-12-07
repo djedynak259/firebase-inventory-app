@@ -18,7 +18,7 @@
                 <input type="tel" ng-model="newcontact.address" class="form-control" placeholder="Address">
               </div>
             </div>
-            <p ng-if="ifContact()">Contact Already Exists</p>
+            <p ng-if="message">Contact Already Exists</p>
             <div class="modal-footer">
               <button type="button" ng-click="close('No')" class="btn btn-default" data-dismiss="modal">Cancel</button>
               <input type="submit" value="Add" class="btn btn-primary"></input>

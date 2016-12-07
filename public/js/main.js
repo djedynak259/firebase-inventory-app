@@ -65,8 +65,8 @@ angular.module('InventoryApp', [
 	return $firebaseObject($firebaseRef.nav);
 })
 
-.factory('ContactFirebase', function($firebaseObject, $firebaseRef) {
-	return $firebaseObject($firebaseRef.contacts);
+.factory('ContactFirebase', function($firebaseArray, $firebaseRef) {
+	return $firebaseArray($firebaseRef.contacts);
 })
 
 .factory('ProductList', function(){

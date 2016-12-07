@@ -41,67 +41,56 @@ angular.module('NavController', ['firebase', 'ui.router','angularModalService'])
 	};
 
 })
+.factory('ContactAPI', function($q, $firebaseArray, $firebaseRef){
+ 	return {
+ 		save: save
+ 	};
 
-.controller('ContactAddModalController', function($scope, close, ContactList, $firebaseObject, $firebaseRef) {
-  
-  	var ifExists = false;
-  	$scope.ifContact = function() {
-  		return ifExists;
-  	}
+ 	function save(contact) {
+ 		var d = $q.defer();
+
+		$firebaseArray($firebaseRef.contacts)
+		.$add(contact)
+		.then(d.resolve)
+		.catch(err => d.reject(err));
+
+		return d.promise;
+ 	}
+ })
+.controller('ContactAddModalController', function($scope, close, ContactAPI, ContactFirebase) {
+  	
 
 	$scope.close = function(result) {
 		close(result, 500); // close, but give 500ms for bootstrap to animate
 	};
 
+	function contactExists(contact) {
+		return _.some(ContactFirebase, { name: contact.name });	
+	}
+
+	// function contactExists(contact) {
+	// 	var exists = false;
+
+	// 	ContactFirebase.forEach(c => {
+	// 		if (c.name === contact.name) {
+	// 			exists = true;
+	// 		}
+	// 	});
+
+	// 	return exists;
+	// };
+
 	$scope.contactAdd = function() {
-		// ContactList.push($scope.newcontact);
-		ifExists = false;
-		writeContactData();
-		$scope.newcontact = {};
+		$scope.message = false;
+
+		if (contactExists($scope.newcontact)) {
+			$scope.message = true;
+			return;
+		}
+
+		ContactAPI.save($scope.newcontact)
+		.then(ref => console.log('contact saved'))
+		.catch(err => console.log(err));
 	};
-
-	function writeContactData() {
-		var newContact = $scope.newcontact;
-		var contactAvailable = checkContacts();
-		console.log('checkContact results -', contactAvailable);
-		return new Promise(function(resolve, reject) {
-			resolve(contactAvailable);
-		})
-		.then(function() {
-			if (contactAvailable === true) {
-				firebase.database().ref('angular/contacts/' + newContact.name)
-				.set(newContact);
-				console.log('Contact Added');
-			} else {
-				ifExists = true;
-				console.log('ifExists', ifExists);
-				$scope.ifContact();
-				console.log('Contact already exists');
-			}
-		});
-	}
-
-	function checkContacts() {
-		var newContact = $scope.newcontact;
-		var available;
-		console.log('name of new contact', newContact.name);		
-		var rawObject = $firebaseObject($firebaseRef.contacts);
-		rawObject.$loaded()
-		.then(function() {
-			for(var key in rawObject) {	
-				console.log(key);
-				if (newContact.name === key) {
-					available = false;
-					return;
-				} else {
-					available = true;
-				}
-			}	
-		});
-		console.log('available', available);
-		return available;		
-	}
-
 })
-
 ;
