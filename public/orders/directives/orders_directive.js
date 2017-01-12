@@ -3,7 +3,6 @@ angular.module('OrdersDirective', ['firebase', 'ui.router'])
 .directive('orderLineItems', function() { 
 
 	function controller($scope, ModalService){
-
 		$scope.showOrderModal = function(order) {
 			console.log(order.price);
 	        ModalService.showModal({

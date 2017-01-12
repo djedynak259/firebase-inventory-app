@@ -41,14 +41,15 @@ angular.module('NavController', ['firebase', 'ui.router','angularModalService'])
 	};
 
 })
+
 .factory('ContactAPI', function($q, $firebaseArray, $firebaseRef){
  	return {
- 		save: save
+ 		save: save,
+ 		remove: remove
  	};
 
  	function save(contact) {
  		var d = $q.defer();
-
 		$firebaseArray($firebaseRef.contacts)
 		.$add(contact)
 		.then(d.resolve)
@@ -56,7 +57,20 @@ angular.module('NavController', ['firebase', 'ui.router','angularModalService'])
 
 		return d.promise;
  	}
+
+ 	function remove(contact) {
+ 		var d = $q.defer();
+ 		$firebaseArray($firebaseRef.contacts)
+
+		.$remove(contact)
+		.then(d.resolve)
+		.catch(err => d.reject(err));
+
+		return d.promise;
+ 	}
+
  })
+
 .controller('ContactAddModalController', function($scope, close, ContactAPI, ContactFirebase) {
   	
 

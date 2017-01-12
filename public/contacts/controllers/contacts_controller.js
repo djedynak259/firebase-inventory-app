@@ -4,6 +4,7 @@ angular.module('ContactsController', ['firebase', 'ui.router'])
 	$scope.contacts = ContactList;
 	$scope.header = Headers.contactHeaders;
 	$scope.fbContacts = ContactFirebase;
+	
 })
 
 ;
