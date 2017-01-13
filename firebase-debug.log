@@ -1,0 +1,14 @@
+[debug] ----------------------------------------------------------------------
+[debug] Command:      /Users/Dan/.nvm/versions/node/v5.12.0/bin/node /Users/Dan/.nvm/versions/node/v5.12.0/bin/firebase serve
+[debug] CLI Version:  3.0.8
+[debug] Platform:     darwin
+[debug] Node Version: v5.12.0
+[debug] Time:         Fri Jan 13 2017 11:38:28 GMT-0800 (PST)
+[debug] ----------------------------------------------------------------------
+[debug] 
+[info] Starting Firebase development server...
+[info] 
+[info] Project Directory: /Users/Dan/Documents/Projects/angular-inventory-app/firebase-inventory-app
+[info] Public Directory: public
+[info] 
+[info] Server listening at: http://localhost:5000
