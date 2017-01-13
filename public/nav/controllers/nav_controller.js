@@ -61,7 +61,6 @@ angular.module('NavController', ['firebase', 'ui.router','angularModalService'])
  	function remove(contact) {
  		var d = $q.defer();
  		$firebaseArray($firebaseRef.contacts)
-
 		.$remove(contact)
 		.then(d.resolve)
 		.catch(err => d.reject(err));
