@@ -19,7 +19,7 @@ angular.module('ProductsController', ['firebase', 'ui.router', 'FirebaseFactorie
 		ProductAPI.remove(product)
 		.then(ref => console.log('product removed'))
 		.catch(err => console.log(err));	
-		}
+		};
 
 	$scope.close = function(result) {
 		close(result, 500); // close, but give 500ms for bootstrap to animate
