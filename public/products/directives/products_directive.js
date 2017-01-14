@@ -1,4 +1,4 @@
-angular.module('ProductsDirective', ['firebase', 'ui.router'])
+angular.module('ProductsDirective', ['firebase', 'ui.router', 'FirebaseFactories'])
 
 .directive('productLineItems', function() { 
   

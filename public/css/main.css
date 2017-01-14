@@ -83,6 +83,12 @@
 	margin: 36px 0 0 0;
 }
 
+.tableLine button {
+  position: absolute;
+  right: 10px;
+  bottom: 20px;
+}
+
 .iconWrap {
 	width: 90px;
 	height: 90px;

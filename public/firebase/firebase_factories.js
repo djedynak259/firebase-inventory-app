@@ -26,12 +26,78 @@ angular.module('FirebaseFactories', ['firebase', 'ui.router','angularModalServic
 	return $firebaseObject($firebaseRef.nav);
 })
 
+.factory('ProductsFirebase', function($firebaseArray, $firebaseRef) {
+	return $firebaseArray($firebaseRef.products);
+})
+
 .factory('ContactsFirebase', function($firebaseArray, $firebaseRef) {
 	return $firebaseArray($firebaseRef.contacts);
 })
 
-.factory('ProductsFirebase', function($firebaseArray, $firebaseRef) {
-	return $firebaseArray($firebaseRef.products);
+// API Calls
+
+.factory('ProductAPI', function($q, $firebaseArray, $firebaseRef, ProductsFirebase){
+ 	return {
+ 		save: save,
+ 		remove: remove
+ 	};
+
+ 	function save(product) {
+ 		var d = $q.defer();
+		ProductsFirebase
+		.$add(product)
+		.then(d.resolve)
+		.catch(d.reject);
+
+		return d.promise;
+ 	}
+
+ 	function remove(product) {	
+ 		var d = $q.defer();
+ 		
+ 		ProductsFirebase
+		.$loaded()
+		.then(data => {
+ 			data.$remove(data.$getRecord(product.$id))
+ 			.then(d.resolve)
+			.catch(d.reject);
+ 		});
+ 		
+		return d.promise;
+ 	}
+
+})
+
+.factory('ContactAPI', function($q, $firebaseArray, $firebaseRef, ContactsFirebase){
+ 	return {
+ 		save: save,
+ 		remove: remove
+ 	};
+
+ 	function save(contact) {
+ 		var d = $q.defer();
+		ContactsFirebase
+		.$add(contact)
+		.then(d.resolve)
+		.catch(d.reject);
+
+		return d.promise;
+ 	}
+
+ 	function remove(contact) {	
+ 		var d = $q.defer();
+
+ 		ContactsFirebase
+		.$loaded()
+		.then(data => {
+ 			data.$remove(data.$getRecord(contact.$id))
+ 			.then(d.resolve)
+			.catch(d.reject);
+ 		});
+ 		
+		return d.promise;
+ 	}
+
 })
 
 ;

@@ -27,38 +27,6 @@ angular.module('NavController', ['firebase', 'ui.router','angularModalService', 
 
 })
 
-.factory('ProductAPI', function($q, $firebaseArray, $firebaseRef, ProductsFirebase){
- 	return {
- 		save: save,
- 		remove: remove
- 	};
-
- 	function save(product) {
- 		var d = $q.defer();
-		ProductsFirebase
-		.$add(product)
-		.then(d.resolve)
-		.catch(d.reject);
-
-		return d.promise;
- 	}
-
- 	function remove(product) {	
- 		var d = $q.defer();
- 		
- 		ProductsFirebase
-		.$loaded()
-		.then(data => {
- 			data.$remove(data.$getRecord(product.$id))
- 			.then(d.resolve)
-			.catch(d.reject);
- 		});
- 		
-		return d.promise;
- 	}
-
- })
-
 .controller('ProductAddModalController', function($scope, close, ProductAPI, ProductsFirebase) {
   
 	$scope.close = function(result) {
@@ -89,38 +57,6 @@ angular.module('NavController', ['firebase', 'ui.router','angularModalService', 
 	// };
 
 })
-
-.factory('ContactAPI', function($q, $firebaseArray, $firebaseRef, ContactsFirebase){
- 	return {
- 		save: save,
- 		remove: remove
- 	};
-
- 	function save(contact) {
- 		var d = $q.defer();
-		ContactsFirebase
-		.$add(contact)
-		.then(d.resolve)
-		.catch(d.reject);
-
-		return d.promise;
- 	}
-
- 	function remove(contact) {	
- 		var d = $q.defer();
-
- 		ContactsFirebase
-		.$loaded()
-		.then(data => {
- 			data.$remove(data.$getRecord(contact.$id))
- 			.then(d.resolve)
-			.catch(d.reject);
- 		});
- 		
-		return d.promise;
- 	}
-
- })
 
 .controller('ContactAddModalController', function($scope, close, ContactAPI, ContactsFirebase) {
   	

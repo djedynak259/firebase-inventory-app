@@ -1,4 +1,4 @@
-angular.module('ContactsDirective', ['firebase', 'ui.router'])
+angular.module('ContactsDirective', ['firebase', 'ui.router', 'FirebaseFactories'])
 
 .directive('contactLineItems', function() { 
 
