@@ -1,4 +1,4 @@
-angular.module('NavController', ['firebase', 'ui.router','angularModalService'])
+angular.module('NavController', ['firebase', 'ui.router','angularModalService', 'FirebaseFactories'])
 
 .controller('NavCtrl', function ($scope, ProductList, ContactList, NavFirebase, ModalService) {
 
@@ -42,7 +42,7 @@ angular.module('NavController', ['firebase', 'ui.router','angularModalService'])
 
 })
 
-.factory('ContactAPI', function($q, $firebaseArray, $firebaseRef, ContactFirebase){
+.factory('ContactAPI', function($q, $firebaseArray, $firebaseRef, ContactsFirebase){
  	return {
  		save: save,
  		remove: remove
@@ -50,7 +50,7 @@ angular.module('NavController', ['firebase', 'ui.router','angularModalService'])
 
  	function save(contact) {
  		var d = $q.defer();
-		ContactFirebase
+		ContactsFirebase
 		.$add(contact)
 		.then(d.resolve)
 		.catch(d.reject);
@@ -61,7 +61,7 @@ angular.module('NavController', ['firebase', 'ui.router','angularModalService'])
  	function remove(contact) {	
  		var d = $q.defer();
 
- 		ContactFirebase
+ 		ContactsFirebase
 		.$loaded()
 		.then(data => {
  			data.$remove(data.$getRecord(contact.$id))
@@ -74,7 +74,7 @@ angular.module('NavController', ['firebase', 'ui.router','angularModalService'])
 
  })
 
-.controller('ContactAddModalController', function($scope, close, ContactAPI, ContactFirebase) {
+.controller('ContactAddModalController', function($scope, close, ContactAPI, ContactsFirebase) {
   	
 
 	$scope.close = function(result) {
@@ -82,13 +82,13 @@ angular.module('NavController', ['firebase', 'ui.router','angularModalService'])
 	};
 
 	function contactExists(contact) {
-		return _.some(ContactFirebase, { name: contact.name });	
+		return _.some(ContactsFirebase, { name: contact.name });	
 	}
 
 	// function contactExists(contact) {
 	// 	var exists = false;
 
-	// 	ContactFirebase.forEach(c => {
+	// 	ContactsFirebase.forEach(c => {
 	// 		if (c.name === contact.name) {
 	// 			exists = true;
 	// 		}

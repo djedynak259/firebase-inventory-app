@@ -1,15 +1,3 @@
-(function() {
-
- var config = {
-    apiKey: "AIzaSyChr5X_3DHzmVYkNrdBSpqvDORHydaCApY",
-    authDomain: "inventory-app1.firebaseapp.com",
-    databaseURL: "https://inventory-app1.firebaseio.com",
-    storageBucket: "inventory-app1.appspot.com",
-    messagingSenderId: "627544312111"
-};
-
-firebase.initializeApp(config);
-
 angular.module('InventoryApp', [
 	'firebase', 
 	'ui.router',
@@ -22,7 +10,8 @@ angular.module('InventoryApp', [
 	'ProductsDirective',
 	'ContactsController',
 	'ContactsDirective',
-	'ColumnHeaderDirective'
+	'ColumnHeaderDirective',
+	'FirebaseFactories'
 	])
 
 .config(function($stateProvider) {
@@ -50,23 +39,6 @@ angular.module('InventoryApp', [
     templateUrl: 'contacts/templates/contacts.html',
     redirectTo: '/'
   });
-})
-
-.config(function($firebaseRefProvider) {
-	$firebaseRefProvider.registerUrl({
-		default:config.databaseURL,
-		object: `${config.databaseURL}/angular/object`,
-		nav: `${config.databaseURL}/angular/nav`,
-		contacts: `${config.databaseURL}/angular/contacts`
-	});
-})
-
-.factory('NavFirebase', function($firebaseObject, $firebaseRef) {
-	return $firebaseObject($firebaseRef.nav);
-})
-
-.factory('ContactFirebase', function($firebaseArray, $firebaseRef) {
-	return $firebaseArray($firebaseRef.contacts);
 })
 
 .factory('ProductList', function(){
@@ -157,4 +129,3 @@ angular.module('InventoryApp', [
 )
 
 ;
-}());
