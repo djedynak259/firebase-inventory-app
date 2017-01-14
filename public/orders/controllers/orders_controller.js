@@ -4,19 +4,6 @@ angular.module('OrdersController', ['firebase', 'ui.router', 'angularModalServic
 	$scope.orders = OrderList;
 	$scope.header = Headers.orderHeaders;
 
-	// $scope.showOrderModal = function() {
-	// 	console.log('testorderOpen');
- //        ModalService.showModal({
- //            templateUrl: 'orders/templates/order-open-modal.html',
- //            controller: "OrderOpenModalController"
- //        }).then(function(modal) {
- //            modal.element.modal();
- //            modal.close.then(function(result) {
- //                $scope.message = "You said " + result;
- //            });
- //        });
- //    }; 
-
 })
 
 .controller('OrderOpenModalController', function($scope, close, order) {
@@ -32,3 +19,17 @@ angular.module('OrdersController', ['firebase', 'ui.router', 'angularModalServic
 })
 
 ;
+
+
+	// $scope.showOrderModal = function() {
+	// 	console.log('testorderOpen');
+ //        ModalService.showModal({
+ //            templateUrl: 'orders/templates/order-open-modal.html',
+ //            controller: "OrderOpenModalController"
+ //        }).then(function(modal) {
+ //            modal.element.modal();
+ //            modal.close.then(function(result) {
+ //                $scope.message = "You said " + result;
+ //            });
+ //        });
+ //    }; 
