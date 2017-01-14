@@ -5,7 +5,6 @@ angular.module('NavController', ['firebase', 'ui.router','angularModalService', 
 	$scope.nav = NavFirebase;
 
 	$scope.showProductAdd = function() {
-		console.log('test');
         ModalService.showModal({
             templateUrl: 'nav/templates/add-product-modal.html',
             controller: "ProductAddModalController"
@@ -28,17 +27,66 @@ angular.module('NavController', ['firebase', 'ui.router','angularModalService', 
 
 })
 
-.controller('ProductAddModalController', function($scope, close, ProductList) {
+.factory('ProductAPI', function($q, $firebaseArray, $firebaseRef, ProductsFirebase){
+ 	return {
+ 		save: save,
+ 		remove: remove
+ 	};
+
+ 	function save(product) {
+ 		var d = $q.defer();
+		ProductsFirebase
+		.$add(product)
+		.then(d.resolve)
+		.catch(d.reject);
+
+		return d.promise;
+ 	}
+
+ 	function remove(product) {	
+ 		var d = $q.defer();
+ 		
+ 		ProductsFirebase
+		.$loaded()
+		.then(data => {
+ 			data.$remove(data.$getRecord(product.$id))
+ 			.then(d.resolve)
+			.catch(d.reject);
+ 		});
+ 		
+		return d.promise;
+ 	}
+
+ })
+
+.controller('ProductAddModalController', function($scope, close, ProductAPI, ProductsFirebase) {
   
 	$scope.close = function(result) {
 		close(result, 500); // close, but give 500ms for bootstrap to animate
 	};
 
-	$scope.productAdd = function (result) {
-		console.log('testbutton');
-		ProductList.push($scope.newProd);
-		$scope.newProd = {};
+	function productExists(product) {
+		return _.some(ProductsFirebase, { name: product.name });	
+	}
+
+	$scope.productAdd = function() {
+		$scope.message = false;
+
+		if (productExists($scope.newProd)) {
+			$scope.message = true;
+			return;
+		}
+
+		ProductAPI.save($scope.newProd)
+		.then(ref => console.log('contact saved'))
+		.catch(err => console.log(err));
 	};
+
+	// $scope.productAdd = function (result) {
+	// 	console.log('testbutton');
+	// 	ProductList.push($scope.newProd);
+	// 	$scope.newProd = {};
+	// };
 
 })
 

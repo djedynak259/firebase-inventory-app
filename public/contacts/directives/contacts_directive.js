@@ -26,13 +26,13 @@ angular.module('ContactsDirective', ['firebase', 'ui.router'])
 
 	}
 
-  return { 
-    restrict: 'E', 
-    scope: { 
-      dataset: '=' 
-    },
-    controller: controller, 
-    templateUrl: 'contacts/templates/contact-line-items.html'
+	return { 
+	    restrict: 'E', 
+	    scope: { 
+	      dataset: '<' 
+	    },
+	    controller: controller, 
+	    templateUrl: 'contacts/templates/contact-line-items.html'
 	}; 
 })
 
