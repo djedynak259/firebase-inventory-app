@@ -68,7 +68,7 @@ angular.module('NavController', ['firebase', 'ui.router','angularModalService', 
 
 })
 
-.controller('ProductMergeModalController', function($scope, close, ProductAPI, ProductsFirebase) {
+.controller('ProductMergeModalController', function($scope, $q, close, ProductAPI, ProductsFirebase) {
   	$scope.products = ProductsFirebase;
 
 	$scope.close = function(result) {
@@ -81,13 +81,11 @@ angular.module('NavController', ['firebase', 'ui.router','angularModalService', 
 
 	$scope.productMerge = function() {
 
-		$scope.exists = false;
+		// $scope.exists = false;
 		$scope.merged = false;
 		$scope.selectAttribues = false;
 		$scope.selectProducts = false;
-
-		console.log($scope.option1.selectedOption);
-		console.log($scope.mergedProduct);
+		var tmpProduct = {};
 
 		if($scope.option1 === undefined || 
 			$scope.option2 === undefined){
@@ -103,31 +101,77 @@ angular.module('NavController', ['firebase', 'ui.router','angularModalService', 
 			return;
 		}
 
-		if (productExists($scope.mergedProduct)) {
-			$scope.exists = true;
-			return;
-		}
+		// if (productExists($scope.mergedProduct)) {
+		// 	$scope.exists = true;
+		// 	return;
+		// }
 
+	 	function mergePromise() {	
+	 		var d = $q.defer();
+	 		
+			buildTmpProduct()
+			.then(function(){
+				mergeAPI()
+				.then(d.resolve)
+				.catch(d.reject);	
+	 		});
+	 		
+			return d.promise;
+	 	}	
+
+		mergePromise()
+ 			.then(ref => console.log(tmpProduct, 'product added'))
+			.catch(ref => console.log(err));
+			
+
+		console.log('tmpProduct', tmpProduct);
+
+		function buildTmpProduct() {
+			console.log($scope.mergedProduct);
+
+			var product1 = _.find(ProductsFirebase, {$id: $scope.option1.selectedOption.$id});
+			console.log('product1', product1);
+			var product2 = _.find(ProductsFirebase, {$id: $scope.option2.selectedOption.$id});
+			console.log('product2', product2);
+			
+			if ($scope.mergedProduct.mergeImg.value1 === true)  {
+				tmpProduct.img = product1.img; 
+			}
+			if ($scope.mergedProduct.mergeImg.value2 === true)  {
+				tmpProduct.img = product2.img; 
+			}
+			if ($scope.mergedProduct.mergeImg.value1 === true)  {
+				tmpProduct.name = product1.name; 
+			}		
+			if ($scope.mergedProduct.mergeImg.value2 === true)  {
+				tmpProduct.name = product2.name; 
+			}
+			if ($scope.mergedProduct.mergeImg.value1 === true)  {
+				tmpProduct.price = product1.price; 
+			}		
+			if ($scope.mergedProduct.mergeImg.value2 === true)  {
+				tmpProduct.price = product2.price; 
+			}
+		}
 
 		function mergeAPI () {
 			var product1 = $scope.option1.selectedOption;
 	  		var product2 = $scope.option2.selectedOption;
 	  		var mergedProduct = {};
 
-			// ProductAPI.remove(product1)
-			// .then(ref => console.log(product1.name + 'removed'))
-			// .catch(err => console.log(err));	
+			ProductAPI.remove(product1)
+			.then(ref => console.log(product1.name + 'removed'))
+			.catch(err => console.log(err));	
 
-			// ProductAPI.remove(product2)
-			// .then(ref => console.log(product1.name+ 'removed'))
-			// .catch(err => console.log(err));	
+			ProductAPI.remove(product2)
+			.then(ref => console.log(product1.name+ 'removed'))
+			.catch(err => console.log(err));	
 			
-			ProductAPI.save($scope.mergedProduct)
+			ProductAPI.save(tmpProduct)
 			.then(ref => $scope.merged = true)
 			.catch(err => console.log(err));
 		}
 
-		mergeAPI();
 	};
 
 })
