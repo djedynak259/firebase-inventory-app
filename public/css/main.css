@@ -194,6 +194,29 @@
   }
 }
 
+.product-merge-modal .dropdown {
+  float:none;
+  display: inline-block;
+  width: 49%;
+}
+
+.product-merge-modal .product-content {
+  display: inline-block;
+  width: 100%;
+}
+
+.product-merge-modal .product-content input {
+  margin-right: 10px;
+}
+
+.product-merge-modal p {
+  margin: 0;
+}
+
+.product-merge-modal .product-attribute {
+  margin: 10px;
+}
+
 /*.nav-side-menu ul :not(collapsed) .arrow:before,
 .nav-side-menu li :not(collapsed) .arrow:before {
   font-family: FontAwesome;

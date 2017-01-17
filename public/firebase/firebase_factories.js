@@ -64,7 +64,7 @@ angular.module('FirebaseFactories', ['firebase', 'ui.router','angularModalServic
  		});
  		
 		return d.promise;
- 	}
+ 	}	
 
 })
 

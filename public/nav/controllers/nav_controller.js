@@ -23,7 +23,16 @@ angular.module('NavController', ['firebase', 'ui.router','angularModalService', 
         }).then(function(modal) {
             modal.element.modal();
         });
-    };    
+    };
+
+    $scope.showProductMerge = function() {
+        ModalService.showModal({
+            templateUrl: 'nav/templates/product-merge-modal.html',
+            controller: "ProductMergeModalController"
+        }).then(function(modal) {
+            modal.element.modal();
+        });
+    };     
 
 })
 
@@ -39,6 +48,7 @@ angular.module('NavController', ['firebase', 'ui.router','angularModalService', 
 
 	$scope.productAdd = function() {
 		$scope.message = false;
+		$scope.saved = false;
 
 		if (productExists($scope.newProd)) {
 			$scope.message = true;
@@ -46,7 +56,7 @@ angular.module('NavController', ['firebase', 'ui.router','angularModalService', 
 		}
 
 		ProductAPI.save($scope.newProd)
-		.then(ref => console.log('contact saved'))
+		.then(ref => $scope.saved = true)
 		.catch(err => console.log(err));
 	};
 
@@ -55,6 +65,41 @@ angular.module('NavController', ['firebase', 'ui.router','angularModalService', 
 	// 	ProductList.push($scope.newProd);
 	// 	$scope.newProd = {};
 	// };
+
+})
+
+.controller('ProductMergeModalController', function($scope, close, ProductAPI, ProductsFirebase) {
+  	$scope.products = ProductsFirebase;
+
+	$scope.close = function(result) {
+		close(result, 500); // close, but give 500ms for bootstrap to animate
+	};
+
+	function productExists(product) {
+		return _.some(ProductsFirebase, { name: product.name });	
+	}
+
+	$scope.productMerge = function(product1, product2) {
+		$scope.message = false;
+		console.log($scope.mergedProduct)
+
+		if (productExists($scope.mergedProduct)) {
+			$scope.message = true;
+			return;
+		}
+
+		ProductAPI.remove(product1)
+		.then(ref => console.log('product1 removed'))
+		.catch(err => console.log(err));	
+
+		ProductAPI.remove(product2)
+		.then(ref => console.log('product2 removed'))
+		.catch(err => console.log(err));	
+		
+		ProductAPI.save($scope.mergedProduct)
+		.then(ref => console.log('merged product saved'))
+		.catch(err => console.log(err));
+	};
 
 })
 
@@ -83,6 +128,7 @@ angular.module('NavController', ['firebase', 'ui.router','angularModalService', 
 
 	$scope.contactAdd = function() {
 		$scope.message = false;
+		$scope.saved = false;
 
 		if (contactExists($scope.newcontact)) {
 			$scope.message = true;
@@ -90,7 +136,7 @@ angular.module('NavController', ['firebase', 'ui.router','angularModalService', 
 		}
 
 		ContactAPI.save($scope.newcontact)
-		.then(ref => console.log('contact saved'))
+		.then(ref => $scope.saved = true)
 		.catch(err => console.log(err));
 	};
 })
