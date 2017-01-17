@@ -8,14 +8,12 @@
       <div class="modal-body">
         <form name="productOne" class=" dropdown col-xs-6">
           <label for="mySelect1">Product 1:</label>
-          <select name="mySelect1" id="mySelect1"
-          ng-options="option1.name for option1 in products track by option1.name"
+          <select name="mySelect1" ng-options="option1.name for option1 in products track by option1.name"
           ng-model="option1.selectedOption"></select>
         </form>
         <form name="productTwo" class=" dropdown col-xs-6">
           <label for="mySelect2">Product 2:</label>
-          <select name="mySelect2" id="mySelect2"
-          ng-options="option2.name for option2 in products track by option2.name"
+          <select name="mySelect2" ng-options="option2.name for option2 in products track by option2.name"
           ng-model="option2.selectedOption"></select>
         </form>
         <form class="form-group" ng-submit="productMerge(option1, option2)">
@@ -49,8 +47,11 @@
               </div>                          
             </div>
           </div>
-          <p ng-if="message">Product Already Exists</p>
-          <div class="modal-footer">
+          <p ng-if="exists">Product Already Exists</p>
+          <p ng-if="merged">Products Merged</p>
+          <p ng-if="selectAttribues">Please select all attribues</p>
+          <p ng-if="selectProducts">Please select 2 Products</p>
+          <div class="modal-footer">          
             <button type="button" ng-click="close('No')" class="btn btn-default" data-dismiss="modal">Cancel</button>
             <input type="submit" value="merge" class="btn btn-primary"></input>
           </div>
