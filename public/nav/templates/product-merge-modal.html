@@ -21,29 +21,59 @@
             <div class="form-group col-xs-6">
               <div class="product-attribute">
                 <p>Image:</p>
-                <label><input type="checkbox" ng-model="mergedProduct.mergeImg.value1" ng-true-value="option1.selectedOption.img" ng-click="mergedProduct.mergeImg.value2 = false">{{option1.selectedOption.img}}</label>
+                <label><input type="checkbox" 
+                ng-model="mergedProduct.mergeImg.value1" 
+                ng-checked="false"
+                ng-true-value="{{option1.selectedOption.img}}" 
+                ng-false-value="false"
+                ng-click="mergedProduct.mergeImg.value2 = false">{{option1.selectedOption.img}}</label>
               </div>
               <div class="product-attribute">
                 <p>Name:</p>
-                <label><input type="checkbox" ng-model="mergedProduct.mergeName.value1" ng-click="mergedProduct.mergeName.value2 = false">{{option1.selectedOption.name}}</label>
+                <label><input type="checkbox" 
+                ng-model="mergedProduct.mergeName.value1"
+                ng-checked="false"
+                ng-true-value="{{option1.selectedOption.name}}"
+                ng-false-value="false"
+                ng-click="mergedProduct.mergeName.value2 = false">{{option1.selectedOption.name}}</label>
               </div>  
               <div class="product-attribute">
                 <p>Price:</p>
-                <label><input type="checkbox" ng-model="mergedProduct.mergePrice.value1" ng-click="mergedProduct.mergePrice.value2 = false">{{option1.selectedOption.price}}</label>
+                <label><input type="checkbox" 
+                ng-model="mergedProduct.mergePrice.value1"
+                ng-checked="false"
+                ng-true-value="{{option1.selectedOption.price}}"
+                ng-false-value="false"
+                ng-click="mergedProduct.mergePrice.value2 = false">{{option1.selectedOption.price}}</label>
               </div>                          
             </div>
             <div class="form-group col-xs-6">
               <div class="product-attribute">
                 <p>Image:</p>
-                <label><input type="checkbox" ng-model="mergedProduct.mergeImg.value2" ng-click="mergedProduct.mergeImg.value1 = false">{{option2.selectedOption.img}}</label>
+                <label><input type="checkbox" 
+                ng-model="mergedProduct.mergeImg.value2"
+                ng-checked="false"
+                ng-true-value="{{option2.selectedOption.img}}"
+                ng-false-value="false"
+                ng-click="mergedProduct.mergeImg.value1 = false">{{option2.selectedOption.img}}</label>
               </div>
               <div class="product-attribute">
                 <p>Name:</p>
-                <label><input type="checkbox" ng-model="mergedProduct.mergeName.value2" ng-click="mergedProduct.mergeName.value1 = false">{{option2.selectedOption.name}}</label>
+                <label><input type="checkbox" 
+                ng-model="mergedProduct.mergeName.value2"
+                ng-checked="false"
+                ng-true-value="{{option2.selectedOption.img}}"
+                ng-false-value="false"
+                ng-click="mergedProduct.mergeName.value1 = false">{{option2.selectedOption.name}}</label>
               </div>  
               <div class="product-attribute">
                 <p>Price:</p>
-                <label><input type="checkbox" ng-model="mergedProduct.mergePrice.value2" ng-click="mergedProduct.mergePrice.value1 = false">{{option2.selectedOption.price}}</label>
+                <label><input type="checkbox" 
+                ng-model="mergedProduct.mergePrice.value2"
+                ng-checked="false"
+                ng-true-value="{{option2.selectedOption.img}}"
+                ng-false-value="false"
+                ng-click="mergedProduct.mergePrice.value1 = false">{{option2.selectedOption.price}}</label>
               </div>                          
             </div>
           </div>

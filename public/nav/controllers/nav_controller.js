@@ -86,11 +86,11 @@ angular.module('NavController', ['firebase', 'ui.router','angularModalService', 
 		$scope.selectAttribues = false;
 		$scope.selectProducts = false;
 
+		console.log($scope.option1.selectedOption);
 		console.log($scope.mergedProduct);
-		console.log($scope.option1);
 
-		if($scope.option1 === undefined 
-			|| $scope.option2 === undefined){
+		if($scope.option1 === undefined || 
+			$scope.option2 === undefined){
 			$scope.selectProducts = true;
 			return;
 		}		
@@ -112,15 +112,15 @@ angular.module('NavController', ['firebase', 'ui.router','angularModalService', 
 		function mergeAPI () {
 			var product1 = $scope.option1.selectedOption;
 	  		var product2 = $scope.option2.selectedOption;
-	  		var mergedProduct = {}
+	  		var mergedProduct = {};
 
-			ProductAPI.remove(product1)
-			.then(ref => console.log(product1.name + 'removed'))
-			.catch(err => console.log(err));	
+			// ProductAPI.remove(product1)
+			// .then(ref => console.log(product1.name + 'removed'))
+			// .catch(err => console.log(err));	
 
-			ProductAPI.remove(product2)
-			.then(ref => console.log(product1.name+ 'removed'))
-			.catch(err => console.log(err));	
+			// ProductAPI.remove(product2)
+			// .then(ref => console.log(product1.name+ 'removed'))
+			// .catch(err => console.log(err));	
 			
 			ProductAPI.save($scope.mergedProduct)
 			.then(ref => $scope.merged = true)
