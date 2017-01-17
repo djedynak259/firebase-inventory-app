@@ -16,7 +16,7 @@
           <select name="mySelect2" ng-options="option2.name for option2 in products track by option2.name"
           ng-model="option2.selectedOption"></select>
         </form>
-        <form class="form-group" ng-submit="productMerge(option1, option2)">
+        <form class="form-group" ng-submit="productMerge()">
           <div class="product-content">
             <div class="form-group col-xs-6">
               <div class="product-attribute">

@@ -75,19 +75,74 @@ angular.module('NavController', ['firebase', 'ui.router','angularModalService', 
 		close(result, 500); // close, but give 500ms for bootstrap to animate
 	};
 
-	function productExists(product) {
-		return _.some(ProductsFirebase, { name: product.name });	
+	function buildTmpProduct() {
+		console.log($scope.mergedProduct);
+		var tmpProduct = {};
+		tmpProduct ={};
+		console.log('tmpProduct', tmpProduct);
+
+		var product1 = _.find(ProductsFirebase, {$id: $scope.option1.selectedOption.$id});
+		console.log('product1', product1);
+		var product2 = _.find(ProductsFirebase, {$id: $scope.option2.selectedOption.$id});
+		console.log('product2', product2);
+	
+		if ($scope.mergedProduct.mergeImg.value1 === true)  {
+			tmpProduct.img = product1.img; 
+		}
+console.log('tmpProduct1', tmpProduct);		
+		if ($scope.mergedProduct.mergeImg.value2 === true)  {
+			tmpProduct.img = product2.img; 
+		}
+console.log('tmpProduct2', tmpProduct);
+		if ($scope.mergedProduct.mergeImg.value1 === true)  {
+			tmpProduct.name = product1.name; 
+		}
+console.log('tmpProduct3', tmpProduct);
+		if ($scope.mergedProduct.mergeImg.value2 === true)  {
+			tmpProduct.name = product2.name; 
+		}
+console.log('tmpProduct4', tmpProduct);
+		if ($scope.mergedProduct.mergeImg.value1 === true)  {
+			tmpProduct.price = product1.price; 
+		}		
+console.log('tmpProduct5', tmpProduct);
+		if ($scope.mergedProduct.mergeImg.value2 === true)  {
+			tmpProduct.price = product2.price; 
+		}
+console.log('tmpProduct6', tmpProduct);
+		return tmpProduct;
+	}
+
+	function mergeProducts() {
+		var d = $q.defer();
+
+		var tempProduct = buildTmpProduct();
+		console.log('tempProduct', tempProduct);
+
+		var product1 = $scope.option1.selectedOption;
+  		var product2 = $scope.option2.selectedOption;
+
+		$q.all(
+			ProductAPI.remove(product1),
+			ProductAPI.remove(product2)
+		)
+		.then(function(data) {
+			return ProductAPI.save(tempProduct);
+		})
+		.then(d.resolve)
+		.catch(d.reject);
+
+		return d.promise;
 	}
 
 	$scope.productMerge = function() {
 
-		// $scope.exists = false;
 		$scope.merged = false;
 		$scope.selectAttribues = false;
 		$scope.selectProducts = false;
 		var tmpProduct = {};
 
-		if($scope.option1 === undefined || 
+		if($scope.option1 === undefined ||
 			$scope.option2 === undefined){
 			$scope.selectProducts = true;
 			return;
@@ -101,77 +156,11 @@ angular.module('NavController', ['firebase', 'ui.router','angularModalService', 
 			return;
 		}
 
-		// if (productExists($scope.mergedProduct)) {
-		// 	$scope.exists = true;
-		// 	return;
-		// }
-
-	 	function mergePromise() {	
-	 		var d = $q.defer();
-	 		
-			buildTmpProduct()
-			.then(function(){
-				mergeAPI()
-				.then(d.resolve)
-				.catch(d.reject);	
-	 		});
-	 		
-			return d.promise;
-	 	}	
-
-		mergePromise()
- 			.then(ref => console.log(tmpProduct, 'product added'))
-			.catch(ref => console.log(err));
-			
-
-		console.log('tmpProduct', tmpProduct);
-
-		function buildTmpProduct() {
-			console.log($scope.mergedProduct);
-
-			var product1 = _.find(ProductsFirebase, {$id: $scope.option1.selectedOption.$id});
-			console.log('product1', product1);
-			var product2 = _.find(ProductsFirebase, {$id: $scope.option2.selectedOption.$id});
-			console.log('product2', product2);
-			
-			if ($scope.mergedProduct.mergeImg.value1 === true)  {
-				tmpProduct.img = product1.img; 
-			}
-			if ($scope.mergedProduct.mergeImg.value2 === true)  {
-				tmpProduct.img = product2.img; 
-			}
-			if ($scope.mergedProduct.mergeImg.value1 === true)  {
-				tmpProduct.name = product1.name; 
-			}		
-			if ($scope.mergedProduct.mergeImg.value2 === true)  {
-				tmpProduct.name = product2.name; 
-			}
-			if ($scope.mergedProduct.mergeImg.value1 === true)  {
-				tmpProduct.price = product1.price; 
-			}		
-			if ($scope.mergedProduct.mergeImg.value2 === true)  {
-				tmpProduct.price = product2.price; 
-			}
-		}
-
-		function mergeAPI () {
-			var product1 = $scope.option1.selectedOption;
-	  		var product2 = $scope.option2.selectedOption;
-	  		var mergedProduct = {};
-
-			ProductAPI.remove(product1)
-			.then(ref => console.log(product1.name + 'removed'))
-			.catch(err => console.log(err));	
-
-			ProductAPI.remove(product2)
-			.then(ref => console.log(product1.name+ 'removed'))
-			.catch(err => console.log(err));	
-			
-			ProductAPI.save(tmpProduct)
-			.then(ref => $scope.merged = true)
-			.catch(err => console.log(err));
-		}
-
+	 	mergeProducts()
+	 	.then(data => {
+	 		$scope.merged = true;
+	 	})
+	 	.catch(err => console.log(err));	
 	};
 
 })
