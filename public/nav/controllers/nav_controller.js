@@ -78,7 +78,9 @@ angular.module('NavController', ['firebase', 'ui.router','angularModalService', 
 	function buildTmpProduct() {
 		console.log($scope.mergedProduct);
 		var tmpProduct = {};
-		tmpProduct ={};
+		// tmpProduct.img = ($scope.mergedProduct.mergeImg.value1) ? product1.img : product2.img;
+		// tmpProduct.name = ($scope.mergedProduct.mergeName.value1) ? product1.name : product2.name;
+		// tmpProduct.price = ($scope.mergedProduct.mergePrice.value1) ? product1.price : product2.price;
 		console.log('tmpProduct', tmpProduct);
 
 		var product1 = _.find(ProductsFirebase, {$id: $scope.option1.selectedOption.$id});
@@ -86,30 +88,25 @@ angular.module('NavController', ['firebase', 'ui.router','angularModalService', 
 		var product2 = _.find(ProductsFirebase, {$id: $scope.option2.selectedOption.$id});
 		console.log('product2', product2);
 	
-		if ($scope.mergedProduct.mergeImg.value1 === true)  {
+		if ($scope.mergedProduct.mergeImg.value1)  {
 			tmpProduct.img = product1.img; 
 		}
-console.log('tmpProduct1', tmpProduct);		
-		if ($scope.mergedProduct.mergeImg.value2 === true)  {
+		if ($scope.mergedProduct.mergeImg.value2)  {
 			tmpProduct.img = product2.img; 
 		}
-console.log('tmpProduct2', tmpProduct);
-		if ($scope.mergedProduct.mergeImg.value1 === true)  {
+		if ($scope.mergedProduct.mergeName.value1)  {
 			tmpProduct.name = product1.name; 
 		}
-console.log('tmpProduct3', tmpProduct);
-		if ($scope.mergedProduct.mergeImg.value2 === true)  {
+		if ($scope.mergedProduct.mergeName.value2)  {
 			tmpProduct.name = product2.name; 
 		}
-console.log('tmpProduct4', tmpProduct);
-		if ($scope.mergedProduct.mergeImg.value1 === true)  {
+		if ($scope.mergedProduct.mergePrice.value1)  {
 			tmpProduct.price = product1.price; 
 		}		
-console.log('tmpProduct5', tmpProduct);
-		if ($scope.mergedProduct.mergeImg.value2 === true)  {
+		if ($scope.mergedProduct.mergePrice.value2)  {
 			tmpProduct.price = product2.price; 
 		}
-console.log('tmpProduct6', tmpProduct);
+		console.log('tmpProduct6', tmpProduct);
 		return tmpProduct;
 	}
 
