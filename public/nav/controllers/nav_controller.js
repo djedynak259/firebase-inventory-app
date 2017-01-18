@@ -72,41 +72,30 @@ angular.module('NavController', ['firebase', 'ui.router','angularModalService', 
   	$scope.products = ProductsFirebase;
 
 	$scope.close = function(result) {
-		close(result, 500); // close, but give 500ms for bootstrap to animate
+		close(result, 500);
 	};
 
 	function buildTmpProduct() {
-		console.log($scope.mergedProduct);
+		const keys = [
+			'img',
+			'name',
+			'price'
+		];
+
 		var tmpProduct = {};
-		// tmpProduct.img = ($scope.mergedProduct.mergeImg.value1) ? product1.img : product2.img;
-		// tmpProduct.name = ($scope.mergedProduct.mergeName.value1) ? product1.name : product2.name;
-		// tmpProduct.price = ($scope.mergedProduct.mergePrice.value1) ? product1.price : product2.price;
+		var product1 = _.find(ProductsFirebase, {$id: $scope.option1.selectedOption.$id});
+		var product2 = _.find(ProductsFirebase, {$id: $scope.option2.selectedOption.$id});
+
+		console.log($scope.mergedProduct);
+		console.log('product1', product1);
+		console.log('product2', product2);
+		
+		keys.forEach(key => {
+			tmpProduct[key] = $scope.mergedProduct[key].value1 ? product1[key] : product2[key];
+		});
+		
 		console.log('tmpProduct', tmpProduct);
 
-		var product1 = _.find(ProductsFirebase, {$id: $scope.option1.selectedOption.$id});
-		console.log('product1', product1);
-		var product2 = _.find(ProductsFirebase, {$id: $scope.option2.selectedOption.$id});
-		console.log('product2', product2);
-	
-		if ($scope.mergedProduct.mergeImg.value1)  {
-			tmpProduct.img = product1.img; 
-		}
-		if ($scope.mergedProduct.mergeImg.value2)  {
-			tmpProduct.img = product2.img; 
-		}
-		if ($scope.mergedProduct.mergeName.value1)  {
-			tmpProduct.name = product1.name; 
-		}
-		if ($scope.mergedProduct.mergeName.value2)  {
-			tmpProduct.name = product2.name; 
-		}
-		if ($scope.mergedProduct.mergePrice.value1)  {
-			tmpProduct.price = product1.price; 
-		}		
-		if ($scope.mergedProduct.mergePrice.value2)  {
-			tmpProduct.price = product2.price; 
-		}
-		console.log('tmpProduct6', tmpProduct);
 		return tmpProduct;
 	}
 
@@ -114,8 +103,6 @@ angular.module('NavController', ['firebase', 'ui.router','angularModalService', 
 		var d = $q.defer();
 
 		var tempProduct = buildTmpProduct();
-		console.log('tempProduct', tempProduct);
-
 		var product1 = $scope.option1.selectedOption;
   		var product2 = $scope.option2.selectedOption;
 
@@ -146,9 +133,9 @@ angular.module('NavController', ['firebase', 'ui.router','angularModalService', 
 		}		
 
 		if($scope.mergedProduct === undefined 
-			|| $scope.mergedProduct.mergeImg === undefined
-			|| $scope.mergedProduct.mergeName === undefined
-			|| $scope.mergedProduct.mergePrice === undefined){
+			|| $scope.mergedProduct.img === undefined
+			|| $scope.mergedProduct.name === undefined
+			|| $scope.mergedProduct.price === undefined){
 			$scope.selectAttribues = true;
 			return;
 		}
