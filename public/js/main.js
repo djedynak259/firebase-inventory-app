@@ -43,21 +43,21 @@ angular.module('InventoryApp', [
 
 .factory('ProductList', function(){
 	return [
-		{
-			name: "box",
-			price: 10,
-			img: "img/box.png"
-		},
-		{
-			name: "box2",
-			price: 12,
-			img: "img/box.png"
-		},
-		{
-			name: "box3",
-			price: 13,
-			img: "img/box.png"
-		}
+		// {
+		// 	name: "box",
+		// 	price: 10,
+		// 	img: "img/box.png"
+		// },
+		// {
+		// 	name: "box2",
+		// 	price: 12,
+		// 	img: "img/box.png"
+		// },
+		// {
+		// 	name: "box3",
+		// 	price: 13,
+		// 	img: "img/box.png"
+		// }
 	];
 })
 
@@ -83,21 +83,21 @@ angular.module('InventoryApp', [
 
 .factory('ContactList', function(){
 	return [
-		{
-			name: "joe",
-			email: 'some@thing.com',
-			address: "589 Clementina Blvd"
-		},
-		{
-			name: "joe2",
-			email: 'some@thing.com',
-			address: "589 Clementina Blvd"
-		},
-		{
-			name: "jo3e",
-			email: 'some@thing.com',
-			address: "589 Clementina Blvd"
-		}
+		// {
+		// 	name: "joe",
+		// 	email: 'some@thing.com',
+		// 	address: "589 Clementina Blvd"
+		// },
+		// {
+		// 	name: "joe2",
+		// 	email: 'some@thing.com',
+		// 	address: "589 Clementina Blvd"
+		// },
+		// {
+		// 	name: "jo3e",
+		// 	email: 'some@thing.com',
+		// 	address: "589 Clementina Blvd"
+		// }
 	];
 })
 
