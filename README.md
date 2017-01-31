@@ -8,4 +8,4 @@ Add Product and Add Contact buttons add objects to firebase.  Merge Products wil
 
 Create Order is not operational at this time.
 
-Products and Contact can be removed with the x buttons on the line items.  Orders cannot be removed at this time.
+Products and Contacts can be removed with the x buttons on the line items.  Orders cannot be removed at this time.
