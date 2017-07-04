@@ -65,17 +65,17 @@ angular.module('InventoryApp', [
 	return [
 		{
 			number: "01",
-			contact: "bill",
+			contact: "Bill",
 			price: 40
 		},
 		{
 			number: "02",
-			contact: "billll",
+			contact: "Joe",
 			price: 4004
 		},
 		{
 			number: "03",
-			contact: "billllll",
+			contact: "Jeffery",
 			price: 404
 		}
 	];
